@@ -8,15 +8,15 @@ body {
 
 .butterfly, .butterfly-2, .butterfly-3, .butterfly-4, .butterfly-5 {
     position: absolute;
-    width: 100px;
-    height: 60px;
+    width: 60px; /* Scaled to 60px width */
+    height: 80px; /* Scaled to 80px height */
     animation: fly 12s infinite ease-in-out;
 }
 
 .butterfly .wing, .butterfly-2 .wing, .butterfly-3 .wing, .butterfly-4 .wing, .butterfly-5 .wing {
     position: absolute;
-    width: 50px;
-    height: 60px;
+    width: 30px; /* Half of 60px for each wing */
+    height: 80px; /* Same height as butterfly */
     background: rgba(128, 128, 128, 0.5); /* Gray with 50% transparency */
     border-radius: 50% 50% 0 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -53,7 +53,7 @@ body {
         opacity: 1;
     }
     50% {
-        transform: translate(calc(50vw - 50px), calc(50vh - 30px)) scale(0.8);
+        transform: translate(calc(50vw - 30px), calc(50vh - 40px)) scale(0.8); /* Adjusted for new size */
     }
     90% {
         opacity: 1;
