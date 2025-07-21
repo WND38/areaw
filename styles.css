@@ -2,7 +2,7 @@ body {
     margin: 0;
     height: 100vh;
     overflow: hidden;
-    background: linear-gradient(to bottom, #ffffff, #ffffff);
+    background: linear-gradient(to bottom, #87ceeb, #e0f6ff);
     position: relative;
 }
 
@@ -17,7 +17,7 @@ body {
     position: absolute;
     width: 50px;
     height: 60px;
-    background: linear-gradient(45deg, #ffffff, #ffffff);
+    background: rgba(128, 128, 128, 0.5); /* Gray with 50% transparency */
     border-radius: 50% 50% 0 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
@@ -44,7 +44,6 @@ body {
     }
 }
 
-/* trajetoria eliptica, aparece do nada */
 @keyframes fly {
     0% {
         opacity: 0;
@@ -65,7 +64,6 @@ body {
     }
 }
 
-/* borboletas que aparecem individualmente */
 .butterfly {
     --start-x: 0;
     --start-y: 10vh;
