@@ -6,18 +6,32 @@ body {
     position: relative;
 }
 
+p#trigger {
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    margin: 20px;
+    user-select: none;
+}
+
+p#trigger:hover {
+    color: #007bff;
+}
+
 .butterfly, .butterfly-2, .butterfly-3, .butterfly-4, .butterfly-5 {
     position: absolute;
-    width: 60px; /* Scaled to 60px width */
-    height: 80px; /* Scaled to 80px height */
-    animation: fly 12s infinite ease-in-out;
+    width: 60px;
+    height: 80px;
+    /* Animation is applied only when .active is on body */
 }
 
 .butterfly .wing, .butterfly-2 .wing, .butterfly-3 .wing, .butterfly-4 .wing, .butterfly-5 .wing {
     position: absolute;
-    width: 30px; /* Half of 60px for each wing */
-    height: 80px; /* Same height as butterfly */
-    background: rgba(128, 128, 128, 0.5); /* Gray with 50% transparency */
+    width: 30px;
+    height: 80px;
+    background: rgba(128, 128, 128, 0.5);
     border-radius: 50% 50% 0 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
@@ -25,14 +39,34 @@ body {
 .butterfly .left, .butterfly-2 .left, .butterfly-3 .left, .butterfly-4 .left, .butterfly-5 .left {
     left: 0;
     transform-origin: right center;
-    animation: flap 0.5s infinite alternate ease-in-out;
 }
 
 .butterfly .right, .butterfly-2 .right, .butterfly-3 .right, .butterfly-4 .right, .butterfly-5 .right {
     right: 0;
     transform-origin: left center;
-    animation: flap 0.5s infinite alternate ease-in-out;
     border-radius: 50% 50% 50% 0;
+}
+
+/* Apply animations only when body has .active class */
+body.active .butterfly, 
+body.active .butterfly-2, 
+body.active .butterfly-3, 
+body.active .butterfly-4, 
+body.active .butterfly-5 {
+    animation: fly 12s infinite ease-in-out;
+}
+
+body.active .butterfly .left, 
+body.active .butterfly-2 .left, 
+body.active .butterfly-3 .left, 
+body.active .butterfly-4 .left, 
+body.active .butterfly-5 .left,
+body.active .butterfly .right, 
+body.active .butterfly-2 .right, 
+body.active .butterfly-3 .right, 
+body.active .butterfly-4 .right, 
+body.active .butterfly-5 .right {
+    animation: flap 0.5s infinite alternate ease-in-out;
 }
 
 @keyframes flap {
@@ -53,7 +87,7 @@ body {
         opacity: 1;
     }
     50% {
-        transform: translate(calc(50vw - 30px), calc(50vh - 40px)) scale(0.8); /* Adjusted for new size */
+        transform: translate(calc(50vw - 30px), calc(50vh - 40px)) scale(0.8);
     }
     90% {
         opacity: 1;
