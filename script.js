@@ -1,7 +1,4 @@
-document.getElementById('trigger').addEventListener('click', function() {
-    document.body.classList.toggle('active');
-});
-/* funções da máquina de escrever! */
+// Typewriter script
 var TxtType = function(el, toRotate, period) {
     this.toRotate = toRotate;
     this.el = el;
@@ -17,12 +14,12 @@ TxtType.prototype.tick = function() {
     var fullTxt = this.toRotate[i];
 
     if (this.isDeleting) {
-    this.txt = fullTxt.substring(0, this.txt.length - 1);
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
     } else {
-    this.txt = fullTxt.substring(0, this.txt.length + 1);
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
     }
 
-    this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+    this.el.innerHTML = this.txt; // Update .wrap directly
 
     var that = this;
     var delta = 200 - Math.random() * 100;
@@ -30,69 +27,65 @@ TxtType.prototype.tick = function() {
     if (this.isDeleting) { delta /= 2; }
 
     if (!this.isDeleting && this.txt === fullTxt) {
-    delta = this.period;
-    this.isDeleting = true;
+        delta = this.period;
+        this.isDeleting = true;
     } else if (this.isDeleting && this.txt === '') {
-    this.isDeleting = false;
-    this.loopNum++;
-    delta = 500;
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
     }
 
     setTimeout(function() {
-    that.tick();
+        that.tick();
     }, delta);
 };
 
-window.onload = function() {
-    var elements = document.getElementsByClassName('typewrite');
-    for (var i=0; i<elements.length; i++) {
-        var toRotate = elements[i].getAttribute('data-type');
-        var period = elements[i].getAttribute('data-period');
-        if (toRotate) {
-          new TxtType(elements[i], JSON.parse(toRotate), period);
-        }
-    }
-    // injeção de CsS
-    var css = document.createElement("style");
-    css.type = "text/css";
-    css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
-    document.body.appendChild(css);
-};
-
+// inicializar a porra toda
 document.addEventListener('DOMContentLoaded', () => {
-    const typewriter = document.querySelector('.typewriter');
+    const typewriter = document.querySelector('.typewrite');
     const wrap = typewriter.querySelector('.wrap');
     const dataType = JSON.parse(typewriter.getAttribute('data-type'));
 
-    // definir as linhas, e palavras
+    // definir linhas e palavras para mudança de cor
     const targets = [
-        { index: 1, word: '族' }, 
+        { index: 1, word: '族' },
         { index: 2, word: 'work in progress' },
         { index: 3, word: 'relax & code' },
         { index: 4, word: '4 fun' },
-        { index: 5, word: 'zer0six'}
+        { index: 5, word: 'zer0six' }
     ];
 
-    // processamento prévio 
+    // pré processamento
     targets.forEach(({ index, word }) => {
         if (dataType[index]) {
             dataType[index] = dataType[index].replace(word, `<span class="highlight">${word}</span>`);
         }
     });
-
-    // Update
     typewriter.setAttribute('data-type', JSON.stringify(dataType));
 
-    // observe mudanças no .wrap para adquirir highlight dinamicas
+    // inicializar maquina de escrever
+    if (dataType) {
+        new TxtType(wrap, dataType, typewriter.getAttribute('data-period'));
+    }
+
+    // highlight dinamico para o wrap
     const observer = new MutationObserver(() => {
-        let currentText = wrap.innerHTML;
+        let currentText = wrap.innerText; // utilize innerText para não ter conflitos com HTML
+        let updatedText = currentText;
         targets.forEach(({ word }) => {
-            if (currentText.includes(word)) {
-                currentText = currentText.replace(word, `<span class="highlight">${word}</span>`);
+            if (updatedText.includes(word)) {
+                updatedText = updatedText.replace(word, `<span class="highlight">${word}</span>`);
             }
         });
-        wrap.innerHTML = currentText;
+        if (updatedText !== wrap.innerHTML) {
+            wrap.innerHTML = updatedText;
+        }
     });
 
     observer.observe(wrap, { childList: true, characterData: true, subtree: true });
+});
+
+// gatilho opcional
+document.getElementById('trigger')?.addEventListener('click', () => {
+    document.body.classList.toggle('active');
 });
