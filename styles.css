@@ -1,115 +1,16 @@
-.butterfly, .butterfly-2, .butterfly-3, .butterfly-4, .butterfly-5 {
-    position: absolute;
-    width: 60px;
-    height: 80px;
-}
+body {
+    background-color:#000000;
+    text-align: center;
+    color:#fff;
+    padding-top:10em;
+  }
+  
+  * { color:#fff; text-decoration: none;}
+/* color, style, height of typewriter */ 
 
-.butterfly .wing, .butterfly-2 .wing, .butterfly-3 .wing, .butterfly-4 .wing, .butterfly-5 .wing {
-    position: absolute;
-    width: 30px;
-    height: 80px;
-    background: rgba(128, 128, 128, 0.5);
-    border-radius: 50% 50% 0 50%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.butterfly .left, .butterfly-2 .left, .butterfly-3 .left, .butterfly-4 .left, .butterfly-5 .left {
-    left: 0;
-    transform-origin: right center;
-}
-
-.butterfly .right, .butterfly-2 .right, .butterfly-3 .right, .butterfly-4 .right, .butterfly-5 .right {
-    right: 0;
-    transform-origin: left center;
-    border-radius: 50% 50% 50% 0;
-}
-
-body.active9403f3a0 .butterfly, 
-body.active9403f3a0 .butterfly-2, 
-body.active9403f3a0 .butterfly-3, 
-body.active9403f3a0 .butterfly-4, 
-body.active9403f3a0 .butterfly-5 {
-    animation: fly 12s infinite ease-in-out;
-}
-
-body.active9403f3a0 .butterfly .left, 
-body.active9403f3a0 .butterfly-2 .left, 
-body.active9403f3a0 .butterfly-3 .left, 
-body.active9403f3a0 .butterfly-4 .left, 
-body.active9403f3a0 .butterfly-5 .left,
-body.active9403f3a0 .butterfly .right, 
-body.active9403f3a0 .butterfly-2 .right, 
-body.active9403f3a0 .butterfly-3 .right, 
-body.active9403f3a0 .butterfly-4 .right, 
-body.active9403f3a0 .butterfly-5 .right {
-    animation: flap 0.5s infinite alternate ease-in-out;
-}
-
-@keyframes flap {
-    0% {
-        transform: rotateY(0deg);
-    }
-    100% {
-        transform: rotateY(60deg);
-    }
-}
-
-@keyframes fly {
-    0% {
-        opacity: 0;
-        transform: translate(var(--start-x), var(--start-y));
-    }
-    10% {
-        opacity: 1;
-    }
-    50% {
-        transform: translate(calc(50vw - 30px), calc(50vh - 40px)) scale(0.8);
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: translate(var(--end-x), var(--end-y));
-    }
-}
-
-.butterfly {
-    --start-x: 0;
-    --start-y: 10vh;
-    --end-x: 100vw;
-    --end-y: 90vh;
-    animation-delay: 0s;
-}
-
-.butterfly-2 {
-    --start-x: 90vw;
-    --start-y: 0;
-    --end-x: 10vw;
-    --end-y: 100vh;
-    animation-delay: 2s;
-}
-
-.butterfly-3 {
-    --start-x: 20vw;
-    --start-y: 100vh;
-    --end-x: 80vw;
-    --end-y: 0;
-    animation-delay: 4s;
-}
-
-.butterfly-4 {
-    --start-x: 100vw;
-    --start-y: 30vh;
-    --end-x: 0;
-    --end-y: 70vh;
-    animation-delay: 6s;
-}
-
-.butterfly-5 {
-    --start-x: 50vw;
-    --start-y: 0;
-    --end-x: 50vw;
-    --end-y: 100vh;
-    animation-delay: 8s;
+/* _____tem um espaço aqui...______ */
+.highlighter {
+    color: rgb(0, 225, 255);
+    font-weight: normal; 
+    padding: 4px; 
 }
