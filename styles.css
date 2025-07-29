@@ -9,7 +9,7 @@ body {
 /* color, style, height of typewriter */ 
 
 /* _____tem um espaço aqui...______ */
-.highlighter {
+.highlight {
     color: rgb(0, 225, 255);
     font-weight: normal; 
     padding: 4px; 
