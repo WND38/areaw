@@ -1,1 +1,45 @@
-/* in the near future */
+body {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center; /* Center content */
+    margin: 50px;
+    background-color: black;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1 {
+    color: rgb(255, 255, 255);
+    font-size: 4rem; /* Big header */
+    text-transform: lowercase; /* Lowercase */
+    margin-bottom: 20px;
+}
+
+a, #cool-effects {
+    color: rgb(0, 255, 251); /* Cyan for links */
+    cursor: pointer;
+    padding: 10px;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none; /* Remove underline */
+}
+
+.typewrite {
+    font-size: 2rem; /* texto maior */
+}
+
+.wrap {
+    border-right: 0.08em solid #fff; /* efeito do cursor */
+    white-space: nowrap; 
+}
+
+.highlight {
+    color: cyan; /* ciano highlight */
+    font-weight: bold;
+    background-color: rgba(0, 0, 255, 0.1);
+    padding: 2px 4px;
+    border-radius: 3px;
+}
