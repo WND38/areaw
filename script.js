@@ -1,4 +1,4 @@
-// Typewriter script
+// eh o scriptas
 var TxtType = function(el, toRotate, period) {
     this.toRotate = toRotate;
     this.el = el;
@@ -19,7 +19,7 @@ TxtType.prototype.tick = function() {
         this.txt = fullTxt.substring(0, this.txt.length + 1);
     }
 
-    this.el.innerHTML = this.txt; // Update .wrap directly
+    this.el.innerHTML = this.txt; // Update do .wrap
 
     var that = this;
     var delta = 200 - Math.random() * 100;
