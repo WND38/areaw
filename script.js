@@ -48,11 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // definir linhas e palavras para mudança de cor
     const targets = [
-        { index: 1, word: '族' },
-        { index: 2, word: 'work in progress' },
-        { index: 3, word: 'relax & code' },
-        { index: 4, word: '4 fun' },
-        { index: 5, word: 'zer0six' }
+       
     ];
 
     // pré processamento
