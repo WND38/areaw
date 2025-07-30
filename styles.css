@@ -1,26 +1,61 @@
 body {
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center; /* Center content */
-    margin: 50px;
+    font-family: 'Courier', Courier, monospace;
+    text-align: left; /* Center content */
+    margin: 20px;
     background-color: black;
     color: #fff;
-    display: flex;
+    display: flex ;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    align-items: left;
+    justify-content: left;
+    left: 10px;
+    box-sizing: border-box;
+    margin: 0; 
+    height: 100vh; 
+    width: 100%; 
+    overflow: hidden;
+    box-shadow:
+    inset 0 0 2px #fff,
+    inset 0 0 4px #fff,
+    inset 0 0 6px #fff;
+    animation: neon-border-glow 14s cubic-bezier(0.42, 0, 0.46, 0.96) infinite;
+}
+
+@keyframes neon-border-glow {
+    0% {
+        box-shadow:
+          inset 0 0 2px #fff,
+          inset 0 0 4px #fff,
+          inset 0 0 6px #fff;
+      }
+      50% {
+        box-shadow:
+          inset 0 0 4px #fff,
+          inset 0 0 8px #fff,
+          inset 0 0 12px #fff;
+      }
+      100% {
+        box-shadow:
+          inset 0 0 2px #fff,
+          inset 0 0 4px #fff,
+          inset 0 0 6px #fff;
+      }
 }
 
 h1 {
     color: rgb(255, 255, 255);
-    font-size: 4rem; /* Big header */
+    font-size: 3rem; /* Big header */
     text-transform: lowercase; /* Lowercase */
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    position: initial;
+    text-align: left;
+    left: 10px;
+    margin: 9px;
 }
 
 a, #cool-effects {
-    color: rgb(0, 255, 251); /* Cyan for links */
-    cursor: pointer;
+    color: rgb(210, 215, 215); /* Cyan for links */
+    cursor: none;
     padding: 10px;
     display: inline-block;
     transition: all 0.3s ease-in-out;
@@ -28,18 +63,18 @@ a, #cool-effects {
 }
 
 .typewrite {
-    font-size: 2rem; /* texto maior */
+    font-size: 1rem; /* texto maior */
 }
 
 .wrap {
-    border-right: 0.08em solid #fff; /* efeito do cursor */
+    border-right: 0.08em solid rgb(0, 195, 255); /* efeito do cursor */
     white-space: nowrap; 
 }
 
 .highlight {
-    color: cyan; /* ciano highlight */
+    color: rgb(0, 255, 255); /* ciano highlight */
     font-weight: bold;
-    background-color: rgba(0, 0, 255, 0.1);
+    background-color: rgb(255, 255, 255);
     padding: 2px 4px;
     border-radius: 3px;
 }
