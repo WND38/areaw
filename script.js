@@ -1,4 +1,3 @@
-// eh o scriptas
 var TxtType = function(el, toRotate, period) {
     this.toRotate = toRotate;
     this.el = el;
@@ -19,7 +18,7 @@ TxtType.prototype.tick = function() {
         this.txt = fullTxt.substring(0, this.txt.length + 1);
     }
 
-    this.el.innerHTML = this.txt; // Update do .wrap
+    this.el.innerHTML = this.txt;
 
     var that = this;
     var delta = 200 - Math.random() * 100;
@@ -40,18 +39,13 @@ TxtType.prototype.tick = function() {
     }, delta);
 };
 
-// inicializar a porra toda
 document.addEventListener('DOMContentLoaded', () => {
     const typewriter = document.querySelector('.typewrite');
     const wrap = typewriter.querySelector('.wrap');
     const dataType = JSON.parse(typewriter.getAttribute('data-type'));
 
-    // definir linhas e palavras para mudança de cor
-    const targets = [
-       
-    ];
+    const targets = [];
 
-    // pré processamento
     targets.forEach(({ index, word }) => {
         if (dataType[index]) {
             dataType[index] = dataType[index].replace(word, `<span class="highlight">${word}</span>`);
@@ -59,14 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     typewriter.setAttribute('data-type', JSON.stringify(dataType));
 
-    // inicializar maquina de escrever
     if (dataType) {
         new TxtType(wrap, dataType, typewriter.getAttribute('data-period'));
     }
 
-    // highlight dinamico para o wrap
     const observer = new MutationObserver(() => {
-        let currentText = wrap.innerText; // utilize innerText para não ter conflitos com HTML
+        let currentText = wrap.innerText;
         let updatedText = currentText;
         targets.forEach(({ word }) => {
             if (updatedText.includes(word)) {
@@ -79,9 +71,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     observer.observe(wrap, { childList: true, characterData: true, subtree: true });
-});
 
-// gatilho opcional
-document.getElementById('trigger')?.addEventListener('click', () => {
-    document.body.classList.toggle('active');
+    // Start button functionality
+    const startButton = document.getElementById('start-button');
+    startButton.addEventListener('click', () => {
+        document.body.classList.remove('blurred');
+        startButton.style.display = 'none'; // Hide the start button after click
+    });
+
+    // Audio player functionality
+    const audio = document.getElementById('background-audio');
+    const playPauseButton = document.getElementById('play-pause-button');
+
+    playPauseButton.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            playPauseButton.textContent = 'Pause';
+        } else {
+            audio.pause();
+            playPauseButton.textContent = 'Play';
+        }
+    });
 });
