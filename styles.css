@@ -112,6 +112,7 @@ a, #cool-effects {
     padding: 10px 20px;
     font-size: 1rem;
     background-color: transparent;
+    bottom: 20px; left: 20px;
     color: rgb(0, 195, 255);
     border: 2px solid rgb(150, 150, 150);
     border-radius: 5px;
