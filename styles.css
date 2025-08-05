@@ -92,10 +92,12 @@ a, #cool-effects {
     cursor: pointer;
     z-index: 1000;
     transition: background-color 0.3s ease;
+    opacity: 100%;
 }
 
 #start-button:hover {
     background-color: rgb(0, 150, 200);
+    opacity: 100%; 
 }
 
 #audio-controls {
