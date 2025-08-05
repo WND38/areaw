@@ -19,6 +19,9 @@ body {
 }
 
 #content {
+    position: relative;
+    width: 100%;
+    height: 100%;
     transition: filter 0.5s ease;
 }
 
@@ -83,8 +86,8 @@ a, #cool-effects {
 
 #start-button {
     position: fixed;
-    top: 50%; left: 50%; 
-    transform: translate(-50%, -50%);
+    bottom: 20px;
+    left: 20px;
     padding: 15px 30px;
     font-size: 1.5rem;
     background-color: transparent;
@@ -99,30 +102,31 @@ a, #cool-effects {
 }
 
 #start-button:hover {
-    animation: pulse-glow 2.5s infinite;
+    animation: pulse-glow 1.5s infinite;
     color: rgb(0, 255, 255);
     border-color: rgb(200, 200, 200);
 }
 
-#audio-controls { /* importante; posições do botão */
-    margin: 10px;
+#audio-controls {
     position: fixed;
-    bottom: 20px;
-    left: 90px; 
+    bottom: 80px;
+    left: 20px;
     z-index: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 #play-pause-button {
     padding: 10px 20px;
     font-size: 1rem;
     background-color: transparent;
-    bottom: 20px; left: 20px;
     color: rgb(0, 195, 255);
     border: 2px solid rgb(150, 150, 150);
     border-radius: 5px;
     cursor: pointer;
     font-family: 'Courier', monospace;
-    text-transform: lowercase;
+    text-transform: uppercase;
     transition: all 0.3s ease;
 }
 
@@ -130,6 +134,41 @@ a, #cool-effects {
     animation: pulse-glow 1.5s infinite;
     color: rgb(0, 255, 255);
     border-color: rgb(200, 200, 200);
+}
+
+#song-selector {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: transparent;
+    color: rgb(0, 195, 255);
+    border: 2px solid rgb(150, 150, 150);
+    border-radius: 5px;
+    font-family: 'Courier', monospace;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+#song-selector:hover {
+    animation: pulse-glow 1.5s infinite;
+    color: rgb(0, 255, 255);
+    border-color: rgb(200, 200, 200);
+}
+
+#song-selector option {
+    background-color: black;
+    color: rgb(0, 195, 255);
+}
+
+#ascii-art {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    color: rgb(0, 255, 255);
+    font-family: 'Courier', monospace;
+    font-size: 0.8rem;
+    white-space: pre;
+    text-shadow: 0 0 5px rgb(0, 255, 255), 0 0 10px rgb(0, 255, 255);
+    animation: neon-glow 2s ease-in-out infinite;
 }
 
 @keyframes pulse-glow {
@@ -141,5 +180,17 @@ a, #cool-effects {
     }
     100% {
         box-shadow: 0 0 5px rgb(150, 150, 150), 0 0 10px rgb(150, 150, 150);
+    }
+}
+
+@keyframes neon-glow {
+    0% {
+        text-shadow: 0 0 5px rgb(0, 255, 255), 0 0 10px rgb(0, 255, 255);
+    }
+    50% {
+        text-shadow: 0 0 10px rgb(0, 200, 200), 0 0 20px rgb(0, 200, 200);
+    }
+    100% {
+        text-shadow: 0 0 5px rgb(0, 255, 255), 0 0 10px rgb(0, 255, 255);
     }
 }
