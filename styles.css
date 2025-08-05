@@ -44,6 +44,9 @@ body.blurred {
     }
 }
 
+#content { transition: filter 0.5s ease; }
+#content.blurred { filter: blur(5px); }
+
 h1 {
     color: rgb(255, 255, 255);
     font-size: 3rem;
