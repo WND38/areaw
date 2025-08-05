@@ -44,9 +44,6 @@ body.blurred {
     }
 }
 
-#content { transition: filter 0.5s ease; }
-#content.blurred { filter: blur(5px); }
-
 h1 {
     color: rgb(255, 255, 255);
     font-size: 3rem;
@@ -95,12 +92,10 @@ a, #cool-effects {
     cursor: pointer;
     z-index: 1000;
     transition: background-color 0.3s ease;
-    opacity: 100%;
 }
 
 #start-button:hover {
     background-color: rgb(0, 150, 200);
-    opacity: 100%; 
 }
 
 #audio-controls {
