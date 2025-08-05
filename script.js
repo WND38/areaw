@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const content = document.getElementById('content');
     startButton.addEventListener('click', () => {
         content.classList.remove('blurred');
-        startButton.style.display = 'none'; // Hide the start button after click
+        startButton.style.display = 'none';
     });
 
     // Audio player functionality
