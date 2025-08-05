@@ -72,14 +72,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(wrap, { childList: true, characterData: true, subtree: true });
 
-    // Start button functionality
-    const startButton = document.getElementById('start-button');
+    // botão 
+    const startButton = document.getElementById('content');
     startButton.addEventListener('click', () => {
         document.body.classList.remove('blurred');
         startButton.style.display = 'none'; // Hide the start button after click
     });
 
-    // Audio player functionality
+    // fazendo o player funcionar
     const audio = document.getElementById('background-audio');
     const playPauseButton = document.getElementById('play-pause-button');
 
