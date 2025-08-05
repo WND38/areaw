@@ -83,6 +83,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // Audio player functionality
     const audio = document.getElementById('background-audio');
     const playPauseButton = document.getElementById('play-pause-button');
+    const songSelector = document.getElementById('song-selector');
+
+    // Load the first song on page load
+    audio.src = songSelector.value;
+    
+    songSelector.addEventListener('change', () => {
+        audio.src = songSelector.value;
+        audio.play();
+        playPauseButton.textContent = 'Pause';
+    });
 
     playPauseButton.addEventListener('click', () => {
         if (audio.paused) {
