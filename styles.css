@@ -104,8 +104,12 @@ a, #cool-effects {
     border-color: rgb(200, 200, 200);
 }
 
-#audio-controls {
+#audio-controls { /* importante; posições do botão */
     margin: 10px;
+    position: fixed;
+    bottom: 20px;
+    left: 150px; 
+    z-index: 900;
 }
 
 #play-pause-button {
