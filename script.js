@@ -72,14 +72,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(wrap, { childList: true, characterData: true, subtree: true });
 
-    // botão 
-    const startButton = document.getElementById('content');
+    // Start button functionality
+    const startButton = document.getElementById('start-button');
+    const content = document.getElementById('content');
     startButton.addEventListener('click', () => {
-        document.body.classList.remove('blurred');
+        content.classList.remove('blurred');
         startButton.style.display = 'none'; // Hide the start button after click
     });
 
-    // fazendo o player funcionar
+    // Audio player functionality
     const audio = document.getElementById('background-audio');
     const playPauseButton = document.getElementById('play-pause-button');
 
