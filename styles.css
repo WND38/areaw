@@ -85,7 +85,7 @@ a, #cool-effects {
 }
 
 #start-button {
-    position: center;
+    position: fixed;
     bottom: 50%;
     left: 50%;
     padding: 15px 30px;
@@ -160,7 +160,7 @@ a, #cool-effects {
 }
 
 #ascii-art {
-    position: absolute;
+    position: fixed;
     right: 50%;
     top: 50%;
     color: rgb(0, 255, 255);
