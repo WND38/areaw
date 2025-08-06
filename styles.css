@@ -86,8 +86,8 @@ a, #cool-effects {
 
 #start-button {
     position: fixed;
-    bottom: 50%;
-    left: 50%;
+    bottom: 48%;
+    left: 35%;
     padding: 15px 30px;
     font-size: 1.5rem;
     background-color: transparent;
@@ -161,8 +161,8 @@ a, #cool-effects {
 
 #ascii-art {
     position: fixed;
-    right: 50%;
-    top: 50%;
+    right: 0%;
+    top: 25%;
     color: rgb(0, 255, 255);
     font-family: 'Courier', monospace;
     font-size: 0.8rem;
