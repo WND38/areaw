@@ -96,5 +96,5 @@ document.addEventListener('DOMContentLoaded', () => {
             playPauseButton.textContent = 'Play';
         }
     });
-});
+
 
