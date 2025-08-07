@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Audio player functionality
     const audio = document.getElementById('background-audio');
     const playPauseButton = document.getElementById('play-pause-button');
-    const songSelector = document.getElementById('song-selector');
 
     });
 
@@ -96,5 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
             playPauseButton.textContent = 'Play';
         }
     });
+
 
 
