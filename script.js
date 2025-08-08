@@ -1,3 +1,4 @@
+/* codigo de typewriter q salvou minha vida */ 
 var TxtType = function(el, toRotate, period) {
     this.toRotate = toRotate;
     this.el = el;
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(wrap, { childList: true, characterData: true, subtree: true });
 
-    // Start button functionality
+    // botão
     const startButton = document.getElementById('start-button');
     const content = document.getElementById('content');
     const audio = document.getElementById('audio');
@@ -87,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         playPauseSlider.value = '1';
     });
 
-    // Audio slider functionality
+    // Sliderzinho de música
     playPauseSlider.addEventListener('input', () => {
         if (playPauseSlider.value == '1') {
             audio.play().catch(error => {
@@ -98,3 +99,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
