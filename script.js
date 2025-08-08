@@ -75,27 +75,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start button functionality
     const startButton = document.getElementById('start-button');
     const content = document.getElementById('content');
+    const audio = document.getElementById('audio');
+    const playPauseSlider = document.getElementById('play-pause-slider');
+
     startButton.addEventListener('click', () => {
         content.classList.remove('blurred');
         startButton.style.display = 'none';
+        audio.play().catch(error => {
+            console.error('Audio playback failed:', error);
+        });
+        playPauseSlider.value = '1';
     });
 
-    // Audio player functionality
-    const audio = document.getElementById('audio');
-    const playPauseButton = document.getElementById('play-pause-button');
-
-    });
-
-    playPauseButton.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.play();
-            playPauseButton.textContent = 'Pause';
+    // Audio slider functionality
+    playPauseSlider.addEventListener('input', () => {
+        if (playPauseSlider.value == '1') {
+            audio.play().catch(error => {
+                console.error('Audio playback failed:', error);
+            });
         } else {
             audio.pause();
-            playPauseButton.textContent = 'Play';
         }
     });
-
-
-
-
+});
