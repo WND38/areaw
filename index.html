@@ -23,7 +23,7 @@
             </a>
         </div>
         <div id="audio-controls">
-            <button onclick="playPausebutton()">Play</button>
+            <input type="range" id="play-pause-slider" min="0" max="1" step="1" value="0">
         </div>
         <pre id="ascii-art">
                        ███████████████                      
@@ -46,25 +46,14 @@
                        ███████████████                      
         </pre>
     </div>
+    <div> 
+    play & pause
+    </div>
     <button id="start-button">Press Here to Start</button>
-    <audio id="audio" loop controls>
+    <audio id="audio" loop>
         <source src="https://raw.githubusercontent.com/WND38/areaw/refs/heads/main/audio/song1.m4a" type="audio/x-m4a">
         Your browser does not support the audio element.
     </audio>
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
