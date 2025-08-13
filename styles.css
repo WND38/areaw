@@ -20,8 +20,8 @@ body {
 #misc {
     position: fixed; 
     font-size: 1px; 
-    right: -10%;
-    left: 19%;
+    right: -1%;
+    left: 1%;
     transition: filter 0.5 ease;
 }
 #misc.blurred {
