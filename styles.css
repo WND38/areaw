@@ -18,10 +18,7 @@ body {
     animation: neon-border-glow 14s cubic-bezier(0.42, 0, 0.46, 0.96) infinite;
 }
 #misc {
-    position: fixed; 
-    font-size: 1px; 
-    right: -1%;
-    left: 1%;
+    position: fixed;
     transition: filter 0.5 ease;
 }
 #misc.blurred {
