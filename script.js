@@ -1,4 +1,3 @@
-/* codigo de typewriter q salvou minha vida */ 
 var TxtType = function(el, toRotate, period) {
     this.toRotate = toRotate;
     this.el = el;
@@ -40,7 +39,59 @@ TxtType.prototype.tick = function() {
     }, delta);
 };
 
+// ASCII art designs
+const asciiArts = [
+    `
+                           ███████████████                      
+            ██████████████████████████████████████████████████    
+               █▓█                                        ███    
+                  █ █                                   ██       
+                    ████                             ███         
+                 ███▓  ███ ███████                 █▓█           
+                ████      ████                    ██             
+                ████     ██                   █ █████            
+                ███     █                   ███  ████            
+                ███   █░                  ██     ████            
+                 ████░                  ███      ███            
+                ▓█                   ██████    ████            
+              ▓██                  ████████   ███               
+            █ █                                ███               
+          ██▓                                     ██             
+        ░█                                           ███          
+       ███████████████████████████████████████████████████       
+                           ███████████████                     
+    `,
+    `
+        ████████████████████████████████████████████████
+        ██                                          ██
+        ██        ██████         ██████         ███ ██
+        ██        ██   ██        ██   ██       ███  ██
+        ██        ██████         ██████       ███    ██
+        ██        ██             ██          ███     ██
+        ██        ██             ██         ███      ██
+        ██        ██████         ██████    ███       ██
+        ██        ██             ██       ███        ██
+        ██        ██             ██      ███         ██
+        ██        ██████         ██████ ███          ██
+        ████████████████████████████████████████████████
+    `,
+    `
+        ████████████████████████████████████████████████
+        ██  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  ██
+        ██  ░░                                   ███  ██
+        ██  ░░░░░                                ███  ██
+        ██  ░░  ██████  ██████  ██████  ██████  ███  ██
+        ██  ░░  ██      ██  ██  ██      ██      ███  ██
+        ██  ░░  ██████  ██████  ██████  ██████  ███  ██
+        ██  ░░  ██      ██  ██      ██      ██  ███  ██
+        ██  ░░  ██████  ██  ██  ██████  ██████  ███  ██
+        ██  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  ██
+        ████████████████████████████████████████████████
+    `
+];
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Typewriter text
     const typewriter = document.querySelector('.typewrite');
     const wrap = typewriter.querySelector('.wrap');
     const dataType = JSON.parse(typewriter.getAttribute('data-type'));
@@ -73,12 +124,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(wrap, { childList: true, characterData: true, subtree: true });
 
-    // botão
+    // Audio and ASCII art setup
     const startButton = document.getElementById('start-button');
     const content = document.getElementById('content');
     const audio = document.getElementById('audio');
     const playPauseSlider = document.getElementById('play-pause-slider');
+    const asciiArtElement = document.getElementById('ascii-art');
 
+    // ASCII art rotation
+    let currentArtIndex = 0;
+    asciiArtElement.textContent = asciiArts[currentArtIndex];
+
+    function rotateAsciiArt() {
+        currentArtIndex = (currentArtIndex + 1) % asciiArts.length;
+        asciiArtElement.textContent = asciiArts[currentArtIndex];
+    }
+
+    setInterval(rotateAsciiArt, 15000);
+
+    // Start button functionality
     startButton.addEventListener('click', () => {
         content.classList.remove('blurred');
         startButton.style.display = 'none';
@@ -88,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         playPauseSlider.value = '1';
     });
 
-    // Sliderzinho de música
+    // Audio slider functionality
     playPauseSlider.addEventListener('input', () => {
         if (playPauseSlider.value == '1') {
             audio.play().catch(error => {
@@ -99,4 +163,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
