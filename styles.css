@@ -20,6 +20,10 @@ body {
 #misc {
     position: fixed;
     transition: filter 0.5 ease;
+    text-transform: uppercase; 
+    display: flex;
+    color: rgb(255, 255, 255); 
+    
 }
 #misc.blurred {
     filter: blur(8px);
