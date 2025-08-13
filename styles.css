@@ -1,165 +1,197 @@
-var TxtType = function(el, toRotate, period) {
-    this.toRotate = toRotate;
-    this.el = el;
-    this.loopNum = 0;
-    this.period = parseInt(period, 10) || 2000;
-    this.txt = '';
-    this.tick();
-    this.isDeleting = false;
-};
+body {
+    font-family: 'Courier', Courier, monospace;
+    text-align: left;
+    margin: 0;
+    background-color: black;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    box-shadow:
+        inset 0 0 2px #fff,
+        inset 0 0 4px #fff,
+        inset 0 0 6px #fff;
+    animation: neon-border-glow 14s cubic-bezier(0.42, 0, 0.46, 0.96) infinite;
+}
 
-TxtType.prototype.tick = function() {
-    var i = this.loopNum % this.toRotate.length;
-    var fullTxt = this.toRotate[i];
+#content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: filter 0.5s ease;
+}
 
-    if (this.isDeleting) {
-        this.txt = fullTxt.substring(0, this.txt.length - 1);
-    } else {
-        this.txt = fullTxt.substring(0, this.txt.length + 1);
+#content.blurred {
+    filter: blur(5px);
+}
+
+@keyframes neon-border-glow {
+    0% {
+        box-shadow:
+            inset 0 0 2px #fff,
+            inset 0 0 4px #fff,
+            inset 0 0 6px #fff;
     }
-
-    this.el.innerHTML = this.txt;
-
-    var that = this;
-    var delta = 200 - Math.random() * 100;
-
-    if (this.isDeleting) { delta /= 2; }
-
-    if (!this.isDeleting && this.txt === fullTxt) {
-        delta = this.period;
-        this.isDeleting = true;
-    } else if (this.isDeleting && this.txt === '') {
-        this.isDeleting = false;
-        this.loopNum++;
-        delta = 500;
+    50% {
+        box-shadow:
+            inset 0 0 4px #fff,
+            inset 0 0 8px #fff,
+            inset 0 0 12px #fff;
     }
-
-    setTimeout(function() {
-        that.tick();
-    }, delta);
-};
-
-// ASCII art designs
-const asciiArts = [
-    `
-                           ███████████████                      
-            ██████████████████████████████████████████████████    
-               █▓█                                        ███    
-                  █ █                                   ██       
-                    ████                             ███         
-                 ███▓  ███ ███████                 █▓█           
-                ████      ████                    ██             
-                ████     ██                   █ █████            
-                ███     █                   ███  ████            
-                ███   █░                  ██     ████            
-                 ████░                  ███      ███            
-                ▓█                   ██████    ████            
-              ▓██                  ████████   ███               
-            █ █                                ███               
-          ██▓                                     ██             
-        ░█                                           ███          
-       ███████████████████████████████████████████████████       
-                           ███████████████                     
-    `,
-    `
-        ████████████████████████████████████████████████
-        ██                                          ██
-        ██        ██████         ██████         ███ ██
-        ██        ██   ██        ██   ██       ███  ██
-        ██        ██████         ██████       ███    ██
-        ██        ██             ██          ███     ██
-        ██        ██             ██         ███      ██
-        ██        ██████         ██████    ███       ██
-        ██        ██             ██       ███        ██
-        ██        ██             ██      ███         ██
-        ██        ██████         ██████ ███          ██
-        ████████████████████████████████████████████████
-    `,
-    `
-        ████████████████████████████████████████████████
-        ██  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  ██
-        ██  ░░                                   ███  ██
-        ██  ░░░░░                                ███  ██
-        ██  ░░  ██████  ██████  ██████  ██████  ███  ██
-        ██  ░░  ██      ██  ██  ██      ██      ███  ██
-        ██  ░░  ██████  ██████  ██████  ██████  ███  ██
-        ██  ░░  ██      ██  ██      ██      ██  ███  ██
-        ██  ░░  ██████  ██  ██  ██████  ██████  ███  ██
-        ██  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  ██
-        ████████████████████████████████████████████████
-    `
-];
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Typewriter text
-    const typewriter = document.querySelector('.typewrite');
-    const wrap = typewriter.querySelector('.wrap');
-    const dataType = JSON.parse(typewriter.getAttribute('data-type'));
-
-    const targets = [];
-
-    targets.forEach(({ index, word }) => {
-        if (dataType[index]) {
-            dataType[index] = dataType[index].replace(word, `<span class="highlight">${word}</span>`);
-        }
-    });
-    typewriter.setAttribute('data-type', JSON.stringify(dataType));
-
-    if (dataType) {
-        new TxtType(wrap, dataType, typewriter.getAttribute('data-period'));
+    100% {
+        box-shadow:
+            inset 0 0 2px #fff,
+            inset 0 0 4px #fff,
+            inset 0 0 6px #fff;
     }
+}
 
-    const observer = new MutationObserver(() => {
-        let currentText = wrap.innerText;
-        let updatedText = currentText;
-        targets.forEach(({ word }) => {
-            if (updatedText.includes(word)) {
-                updatedText = updatedText.replace(word, `<span class="highlight">${word}</span>`);
-            }
-        });
-        if (updatedText !== wrap.innerHTML) {
-            wrap.innerHTML = updatedText;
-        }
-    });
+h1 {
+    color: rgb(255, 255, 255);
+    font-size: 3rem;
+    text-transform: lowercase;
+    margin-bottom: 5px;
+    margin: 9px;
+}
 
-    observer.observe(wrap, { childList: true, characterData: true, subtree: true });
+a, #cool-effects {
+    color: rgb(210, 215, 215);
+    cursor: none;
+    padding: 10px;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}
 
-    // Audio and ASCII art setup
-    const startButton = document.getElementById('start-button');
-    const content = document.getElementById('content');
-    const audio = document.getElementById('audio');
-    const playPauseSlider = document.getElementById('play-pause-slider');
-    const asciiArtElement = document.getElementById('ascii-art');
+.typewrite {
+    font-size: 1rem;
+}
 
-    // ASCII art rotation
-    let currentArtIndex = 0;
-    asciiArtElement.textContent = asciiArts[currentArtIndex];
+.wrap {
+    border-right: 0.08em solid rgb(0, 195, 255);
+    white-space: nowrap;
+}
 
-    function rotateAsciiArt() {
-        currentArtIndex = (currentArtIndex + 1) % asciiArts.length;
-        asciiArtElement.textContent = asciiArts[currentArtIndex];
+.highlight {
+    color: rgb(0, 255, 255);
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+#start-button {
+    position: fixed;
+    bottom: 48%;
+    left: 35%;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: rgb(0, 195, 255);
+    border: 2px solid rgb(150, 150, 150);
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    font-family: 'Courier', monospace;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+#start-button:hover {
+    animation: pulse-glow 1.5s infinite;
+    color: rgb(0, 255, 255);
+    border-color: rgb(200, 200, 200);
+}
+
+#audio-controls {
+    position: fixed;
+    bottom: 5%;
+    left: 20px;
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#audio-label {
+    font-size: 1rem;
+    color: rgb(0, 195, 255);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px rgb(0, 195, 255), 0 0 10px rgb(0, 195, 255);
+}
+
+#play-pause-slider {
+    width: 60px;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(150, 150, 150);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#play-pause-slider:hover {
+    animation: pulse-glow 1.5s infinite;
+    border-color: rgb(200, 200, 200);
+}
+
+#play-pause-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: rgb(0, 195, 255);
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgb(0, 195, 255), 0 0 10px rgb(0, 195, 255);
+}
+
+#play-pause-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: rgb(0, 195, 255);
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgb(0, 195, 255), 0 0 10px rgb(0, 195, 255);
+}
+
+#ascii-art {
+    position: fixed;
+    right: 0%;
+    top: 15%;
+    color: rgb(0, 195, 255);
+    font-family: 'Courier', monospace;
+    font-size: 0.7rem;
+    white-space: pre;
+    text-shadow: 0 0 5px rgb(0, 195, 255), 0 0 10px rgb(0, 195, 255);
+    animation: neon-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 5px rgb(150, 150, 150), 0 0 10px rgb(150, 150, 150);
     }
+    50% {
+        box-shadow: 0 0 10px rgb(200, 200, 200), 0 0 20px rgb(200, 200, 200);
+    }
+    100% {
+        box-shadow: 0 0 5px rgb(150, 150, 150), 0 0 10px rgb(150, 150, 150);
+    }
+}
 
-    setInterval(rotateAsciiArt, 15000);
-
-    // Start button functionality
-    startButton.addEventListener('click', () => {
-        content.classList.remove('blurred');
-        startButton.style.display = 'none';
-        audio.play().catch(error => {
-            console.error('Audio playback failed:', error);
-        });
-        playPauseSlider.value = '1';
-    });
-
-    // Audio slider functionality
-    playPauseSlider.addEventListener('input', () => {
-        if (playPauseSlider.value == '1') {
-            audio.play().catch(error => {
-                console.error('Audio playback failed:', error);
-            });
-        } else {
-            audio.pause();
-        }
-    });
-});
+@keyframes neon-glow {
+    0% {
+        text-shadow: 0 0 5px rgb(0, 195, 255), 0 0 10px rgb(0, 195, 255);
+    }
+    50% {
+        text-shadow: 0 0 10px rgb(0, 200, 200), 0 0 20px rgb(0, 200, 200);
+    }
+    100% {
+        text-shadow: 0 0 5px rgb(0, 195, 255), 0 0 10px rgb(0, 195, 255);
+    }
+}
