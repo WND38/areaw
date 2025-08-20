@@ -39,7 +39,7 @@ TxtType.prototype.tick = function() {
     }, delta);
 };
 
-// ASCII art designs
+// ASCII
 const asciiArts = [
     `
                            ███████████████                      
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(rotateAsciiArt, 15000);
 
-    // Start button functionality
+    // Start button 
     startButton.addEventListener('click', () => {
         content.classList.remove('blurred');
         startButton.style.display = 'none';
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         playPauseSlider.value = '1';
     });
 
-    // Audio slider functionality
+    // Audio slider 
     playPauseSlider.addEventListener('input', () => {
         if (playPauseSlider.value == '1') {
             audio.play().catch(error => {
@@ -197,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 
 
