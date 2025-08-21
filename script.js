@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     observer.observe(wrap, { childList: true, characterData: true, subtree: true });
 
-    // Audio and ASCII art setup
+    // Audio & ASCII
     const startButton = document.getElementById('start-button');
     const content = document.getElementById('content');
     const audio = document.getElementById('audio');
@@ -197,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 
 
