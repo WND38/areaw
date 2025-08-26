@@ -1,4 +1,6 @@
-var TxtType = function(el, toRotate, period) {
+/* the code responsible for typewriting (shoutout to who made it) */
+
+var TxtType = function (el, toRotate, period) {
     this.toRotate = toRotate;
     this.el = el;
     this.loopNum = 0;
@@ -8,7 +10,7 @@ var TxtType = function(el, toRotate, period) {
     this.isDeleting = false;
 };
 
-TxtType.prototype.tick = function() {
+TxtType.prototype.tick = function () {
     var i = this.loopNum % this.toRotate.length;
     var fullTxt = this.toRotate[i];
 
@@ -23,7 +25,9 @@ TxtType.prototype.tick = function() {
     var that = this;
     var delta = 200 - Math.random() * 100;
 
-    if (this.isDeleting) { delta /= 2; }
+    if (this.isDeleting) {
+        delta /= 2;
+    }
 
     if (!this.isDeleting && this.txt === fullTxt) {
         delta = this.period;
@@ -34,12 +38,21 @@ TxtType.prototype.tick = function() {
         delta = 500;
     }
 
-    setTimeout(function() {
+    setTimeout(function () {
         that.tick();
     }, delta);
 };
 
-// ASCII
+// Function to normalize ASCII art by removing common leading indentation and empty lines
+function normalizeAscii(art) {
+    const lines = art.split('\n').filter(line => line.trim() !== '');
+    if (lines.length === 0) return '';
+    const minIndent = Math.min(...lines.map(line => line.match(/^\s*/)[0].length));
+    const trimmedLines = lines.map(line => line.slice(minIndent));
+    return trimmedLines.join('\n');
+}
+
+// ASCII arts (normalized)
 const asciiArts = [
     `
                            ███████████████                      
@@ -77,14 +90,7 @@ const asciiArts = [
         +++++π∞-=+π+++++++++++++≠-+                            
         -+-+++++π-++ππ+++++÷=ππ-÷≠∞                            
         +++++++π≠+≠++√π√√π≈≠÷÷≠≠π                             
-       πππ                        πππ                                  
-        π÷π         ππ≠≠≠≠≠π      π÷π   πππ        ππ        ππ≠≠≠≠≠√π   
-        πππππππ    πππππππ≈≈π     ∞∞    ππ     ππππ∞∞πππ    πππππππ≈÷π   
-      πππ                 ∞∞π    π÷π           π∞∞≈∞∞∞÷            ∞÷π  
-     π∞π                 π∞π     π÷π    πππ   π∞∞ ∞∞ ∞=            ≈∞π 
-     π÷π                 ≈∞π     π∞π   πππ     ππ√πππππ           ≈≈π   
-                    ππππ≠×∞       ≠√πππππ        ∞π          πππππππ    
-                    
+
          πππ∞∞πππ ππππππ∞π       ππ ππ    ππ                       
             ππ    ππ    ππ       ππ ππ    ππ                       
             ππ    ππ    ππ       ππ ππ    ππ                       
@@ -92,7 +98,7 @@ const asciiArts = [
     `,
     `
                                                 
-                                              
+                                             
                                               
                     ██▒▒██                    
                   ██▒     ▒                   
@@ -107,8 +113,8 @@ const asciiArts = [
            ██▒   ▒▒         ▒▒   ██           
           ███                    ▒█           
          ███▒     ▒▒       ▒      ▒█          
-        ███▒   ▒   ▒▒     ▒   ▒▒   ▒█         
-        ██▒   ▒▒▒   ▒▓   ▒░   ▒▒▒   ▒█        
+        ███▒   ▒   ▒      ▒   ▒▒   ▒█         
+        ██▒   ▒▒▒   ▒     ▒░   ▒▒▒   ▒█        
        ██▒   ▒▒░▒▒   ▒   ▒   ▒░░▒▒   ▒█       
       ██▒   ▒▒░░░▒▒   ▒ ▒   ▒▒░░░▒    ▓       
      ███    ▒░░░░░▒   ░    ▒▒░░░░░▒   ▒█      
@@ -122,7 +128,7 @@ const asciiArts = [
         independent state allied forces   
                                               
     `
-];
+].map(normalizeAscii);
 
 document.addEventListener('DOMContentLoaded', () => {
     // Typewriter text
@@ -132,7 +138,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const targets = [];
 
-    targets.forEach(({ index, word }) => {
+    targets.forEach(({
+        index,
+        word
+    }) => {
         if (dataType[index]) {
             dataType[index] = dataType[index].replace(word, `<span class="highlight">${word}</span>`);
         }
@@ -146,7 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new MutationObserver(() => {
         let currentText = wrap.innerText;
         let updatedText = currentText;
-        targets.forEach(({ word }) => {
+        targets.forEach(({
+            word
+        }) => {
             if (updatedText.includes(word)) {
                 updatedText = updatedText.replace(word, `<span class="highlight">${word}</span>`);
             }
@@ -156,13 +167,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    observer.observe(wrap, { childList: true, characterData: true, subtree: true });
+    observer.observe(wrap, {
+        childList: true,
+        characterData: true,
+        subtree: true
+    });
 
     // Audio & ASCII
     const startButton = document.getElementById('start-button');
     const content = document.getElementById('content');
     const audio = document.getElementById('audio');
     const playPauseSlider = document.getElementById('play-pause-slider');
+    const asciiContainer = document.getElementById('ascii-container');
     const asciiArtElement = document.getElementById('ascii-art');
 
     // ASCII art rotation
@@ -174,7 +190,48 @@ document.addEventListener('DOMContentLoaded', () => {
         asciiArtElement.textContent = asciiArts[currentArtIndex];
     }
 
-    setInterval(rotateAsciiArt, 15000);
+    setInterval(rotateAsciiArt, 30000);
+
+    // Draggable and scalable ASCII container
+    let isDragging = false;
+    let startX, startY, initialLeft, initialTop;
+    let currentScale = 1;
+
+    asciiContainer.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return; // Left click only
+        isDragging = true;
+        const rect = asciiContainer.getBoundingClientRect();
+        initialLeft = rect.left;
+        initialTop = rect.top;
+        startX = e.clientX;
+        startY = e.clientY;
+        asciiContainer.style.cursor = 'grabbing';
+        // switch to absolute
+        asciiContainer.style.left = `${initialLeft}px`;
+        asciiContainer.style.top = `${initialTop}px`;
+        asciiContainer.style.transform = `scale(${currentScale})`;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
+        asciiContainer.style.left = `${initialLeft + deltaX}px`;
+        asciiContainer.style.top = `${initialTop + deltaY}px`;
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        asciiContainer.style.cursor = 'move';
+    });
+
+    asciiContainer.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        currentScale += e.deltaY * -0.001;
+        currentScale = Math.min(Math.max(0.5, currentScale), 2);
+        asciiContainer.style.transform = `scale(${currentScale})`;
+    });
 
     // Start button 
     startButton.addEventListener('click', () => {
@@ -197,9 +254,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
-
-
-
-
-
