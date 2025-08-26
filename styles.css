@@ -26,7 +26,8 @@ body {
 }
 
 #content.blurred {
-    filter: blur(5px);
+    filter: blur(5px) grayscale(100%);
+    filter: brightness(-10%) contrast(50%) saturate(30%);
 }
 
 @keyframes neon-border-glow {
@@ -86,13 +87,14 @@ a, #cool-effects {
 
 #start-button {
     position: fixed;
-    bottom: 48%;
-    left: 35%;
+    display: display-box;
+    bottom: 44%;
+    left: 5%;
     padding: 15px 30px;
     font-size: 1.5rem;
     background-color: transparent;
     color: rgb(0, 195, 255);
-    border: 2px solid rgb(150, 150, 150);
+    border: 2px solid rgb(57, 56, 56);
     border-radius: 5px;
     cursor: pointer;
     z-index: 1000;
@@ -122,7 +124,7 @@ a, #cool-effects {
     color: rgb(0, 195, 255);
     font-weight: bold;
     text-transform: uppercase;
-    text-shadow: 0 0 5px rgb(0, 195, 255), 0 0 10px rgb(0, 195, 255);
+    text-shadow: 0 0 5px rgba(0, 195, 255, 0.345), 0 0 10px rgb(0, 195, 255);
 }
 
 #play-pause-slider {
@@ -130,8 +132,8 @@ a, #cool-effects {
     height: 8px;
     -webkit-appearance: none;
     appearance: none;
-    background: rgb(255, 255, 255);
-    border: 1px solid rgb(150, 150, 150);
+    background: rgb(48, 48, 48);
+    border: 1px solid rgb(184, 184, 184);
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -160,16 +162,24 @@ a, #cool-effects {
     box-shadow: 0 0 5px rgb(0, 195, 255), 0 0 10px rgb(0, 195, 255);
 }
 
+#ascii-container {
+    position: absolute;
+    left: 75%;
+    top: 25%;
+    transform: translateX(-50%);
+    cursor: move;
+    user-select: none;
+}
+
 #ascii-art {
-    position: fixed;
-    right: 0%;
-    top: 15%;
     color: rgb(0, 195, 255);
     font-family: 'Courier', monospace;
-    font-size: 0.7rem;
+    font-size: 1.0rem;
     white-space: pre;
     text-shadow: 0 0 5px rgb(0, 195, 255), 0 0 10px rgb(0, 195, 255);
-    animation: neon-glow 2s ease-in-out infinite;
+    animation: neon-glow 4s ease-in-out infinite;
+    cursor: inherit;
+    margin: 0;
 }
 
 @keyframes pulse-glow {
